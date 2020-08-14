@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block title%}
+Dashboard
+{%endblock title%}
+{%block style%}
+<link href="{% static 'css/dashboard.css'%}" rel="stylesheet">
+{% endblock style %}
+{% block content %}
+{% csrf_token %}
+<div class="bg">
+    <div class="container">
+        <div class="jumbotron">
+            <legend> Watering System</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Toggle Auto Watering</h5><br>
+                    <label class=" switch">
+                        <input type="checkbox" id='Auto' {{auto}}>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="col-md-6 ml-auto">
+                    <h5>Manually Water</h5><br>
+                    <label class="switch">
+                        <input type="checkbox" id='Manual' {{manual}}>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn dropdown-toggle btn-primary btn-sm" data-toggle="dropdown">Data Log
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu" , style="height:40%; overflow:hidden; overflow-y:scroll;">
+                    {% for item in log %}
+                    <li>{{item}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content%}
+
+{% block javascript %}
+<script>
+    csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    $(document).ready(function () {
+        $("#Auto").on('change', function () {
+            event.preventDefault();
+            if ($(this).is(':checked')) {
+                $.ajax({
+                    headers: { 'X-CSRFToken': csrftoken },
+                    type: "POST",
+                    url: "{% url 'homeinfo:update_toggle'%}",
+                    data: { "button": "auto", "change": "on" },
+                    success: function (response) {
+                        console.log("Toggle change sent successfully")
+                    },
+                    error: function (response) {
+                        alert(response["responseJSON"]["error"]);
+                    }
+                })
+
+            }
+            else {
+                $.ajax({
+                    headers: { 'X-CSRFToken': csrftoken },
+                    type: "POST",
+                    url: "{% url 'homeinfo:update_toggle'%}",
+                    data: { "button": "auto", "change": "off" },
+                    success: function (response) {
+                        console.log("Toggle change sent successfully")
+                    },
+                    error: function (response) {
+                        alert(response["responseJSON"]["error"]);
+                    }
+                })
+            }
+        });
+
+        $("#Manual").on('change', function () {
+            event.preventDefault();
+            if ($(this).is(':checked')) {
+                $.ajax({
+                    headers: { 'X-CSRFToken': csrftoken },
+                    type: "POST",
+                    url: "{% url 'homeinfo:update_toggle'%}",
+                    data: { "button": "manual", "change": "on" },
+                    success: function (response) {
+                        console.log("Toggle change sent successfully")
+                    },
+                    error: function (response) {
+                        alert(response["responseJSON"]["error"]);
+                    }
+                })
+            }
+            else {
+                $.ajax({
+                    headers: { 'X-CSRFToken': csrftoken },
+                    type: "POST",
+                    url: "{% url 'homeinfo:update_toggle'%}",
+                    data: { "button": "manual", "change": "off" },
+                    success: function (response) {
+                        console.log("Toggle change sent successfully")
+                    },
+                    error: function (response) {
+                        alert(response["responseJSON"]["error"]);
+                    }
+                })
+            }
+        });
+    })
+</script>
+<script>
+        (function worker() {
+            $.ajax({
+                url: "{% url 'homeinfo:update_page'%}",
+                success: function (data) {
+                    if (data.manual == false) {
+                        $('#Manual').prop('checked', false);
+                    } else {
+                        $('#Manual').prop('checked', true)
+                    }
+                    if (data.auto == false) {
+                        $('#Auto').prop('checked', false);
+                    } else {
+                        $('#Auto').prop('checked', true);
+                    }
+                    if (data.log) {
+                        var logs = ""
+                        for (item of data.log) {
+                            logs += "<li>" + item + "</li>"
+                        }
+                        $(".dropdown-menu").html(logs)
+                    }
+                },
+                complete: function () {
+                    // Schedule the next request when the current one's complete
+                    setTimeout(worker, 5000);
+                }
+            });
+        })();
+</script>
+{% endblock javascript%}

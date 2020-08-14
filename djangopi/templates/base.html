@@ -41,8 +41,9 @@
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="#">Games</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'homeinfo:dashboard'%}">Home Info</a></li>
             </ul>
-            <ul class="navbar-nav">
+            <ul class=" navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout'%}">Logout</a></li>
             </ul>
             <span class="navbar-text">{{user.username}}</span>
@@ -58,13 +59,15 @@
             <span class="text-muted">https://github.com/EdwinIngJ</span>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+    {% block javascript %}
+    {% endblock javascript%}
 </body>
 
 </html>
