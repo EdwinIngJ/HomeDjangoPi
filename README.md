@@ -1,5 +1,5 @@
 # HomeDjangoPi
-A home webserver powered by Django with numerous functionalities.
+A home webserver with numerous functionalities powered by Django.
 
 **`Documentation`** |
 ------------------- |
