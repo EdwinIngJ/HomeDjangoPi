@@ -55,7 +55,8 @@ This section addresses how to use [RaspbianOS](https://www.raspberrypi.org/downl
 
 ### Changing Username/Password
 1. Follow these [instructions](https://www.maketecheasier.com/change-raspberry-pi-password/) to create a new username and password.
-2. It is recommended you disable the default `pi` account in order to secure your Raspberry Pi.
+2. Make sure the new user is in the same groups as `pi`.
+3. It is recommended you disable the default `pi` account in order to secure your Raspberry Pi.
 
 ### Connect to WiFi
 1. Follow these [instructions](https://www.raspberrypi.org/documentation/configuration/wireless/desktop.md) to connect your Raspberry Pi to your wireless network of choice. Be sure it is one you trust.
