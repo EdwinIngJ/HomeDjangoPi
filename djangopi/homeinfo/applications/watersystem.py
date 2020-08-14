@@ -4,7 +4,7 @@ import time
 
 class WateringSystem:
     def check_toggles(self):
-        toggles = models.ToggleWatering.objects.get(pk=4)
+        toggles = models.ToggleWatering.objects.filter().first()
         return (toggles.manual, toggles.auto)
         pass
 
@@ -13,7 +13,7 @@ class WateringSystem:
         log_instance.save()
 
     def toggle_buttons(self):
-        toggles = models.ToggleWatering.objects.get(pk=4)
+        toggles = models.ToggleWatering.objects.filter().first()
         toggles.manual = False
         toggles.save()
 

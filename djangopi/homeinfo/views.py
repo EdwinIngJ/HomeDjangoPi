@@ -11,7 +11,7 @@ class DashBoard(SuperuserRequiredMixin, TemplateView):
     template_name = "homeinfo/dashboard.html"
 
     def get_context_data(self, **kwargs):
-        self.toggles = ToggleWatering.objects.get(pk=4)
+        self.toggles = ToggleWatering.objects.filter().first()
         log_items = Log.objects.filter().order_by("time_watered")[:16]
         context = super().get_context_data(**kwargs)
         context["manual"] = ": checked" if self.toggles.manual else ""
@@ -26,7 +26,7 @@ class DashBoard(SuperuserRequiredMixin, TemplateView):
 
 @login_required
 def update_toggle(request):
-    toggles = ToggleWatering.objects.get(pk=4)
+    toggles = ToggleWatering.objects.filter().first()
     if request.is_ajax() and request.method == "POST":
         button = request.POST.get("button")
         b_change = request.POST.get("change")
@@ -50,7 +50,7 @@ def update_toggle(request):
 
 @login_required
 def update_page(request):
-    toggles = ToggleWatering.objects.get(pk=4)
+    toggles = ToggleWatering.objects.filter().first()
     log_items = Log.objects.filter().order_by("time_watered")[:16]
     response_data = {}
     response_data["manual"] = toggles.manual
