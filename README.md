@@ -25,4 +25,4 @@ $ sudo python manage.py makemigrations
 $ sudo python manage.py runserver
 ```
 Additionally the Homeinfo app won't work unless there is an entry of ToggleWatering within the db. 
-To create an entry, create a superuser and manual add it with the admin panel.
+To create an entry, create a superuser and manually add it with the admin panel.
