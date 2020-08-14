@@ -14,7 +14,7 @@ $ git clone https://github.com/EdwinIngJ/HomeDjangoPi.git
 $ cd HomeDjangoPi
 $ pip install -r requirements.txt
 ```
-*note that this project is only compatible with python3
+*Note that this project is only compatible with python3
 
 #### Running For the First Time
 Setup IP address in the settings.py within the djangopi/ directory and set DEBUG to False
@@ -24,8 +24,8 @@ $ sudo python manage.py migrate
 $ sudo python manage.py makemigrations
 $ sudo python manage.py runserver
 ```
-Additionally the Homeinfo app won't work unless there is an entry of ToggleWatering within the db. 
-To create an entry, create a superuser and manually add it with the admin panel.
+Additionally, the Homeinfo app won't work unless there is one entry of ToggleWatering within the database. 
+To create an entry, first create a superuser and then manually add a new entry with the admin panel. Login as a superuser to access the Homeinfo app.
 
 # Raspberry Pi Setup
 This section explains how to setup a Raspberry Pi, specifically its OS and system settings. 
