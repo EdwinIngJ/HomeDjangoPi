@@ -17,10 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+from homeinfo.applications.watersystem import WateringSystem
+import threading
+
 urlpatterns = [
     path("", views.HomePage.as_view(), name="home"),
     path("thanks/", views.ThanksPage.as_view(), name="thanks"),
     path("admin/", admin.site.urls),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("homeinfo/", include("homeinfo.urls", namespace="homeinfo")),
 ]
+
+# watersys = WateringSystem()
+# thread_watersystem = threading.Thread(target=watersys.run)
+# thread_watersystem.start()
