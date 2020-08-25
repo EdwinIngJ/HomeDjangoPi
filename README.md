@@ -66,7 +66,6 @@ This section addresses how to use [RaspbianOS](https://www.raspberrypi.org/downl
    
    Be sure to assign **unique** `<STATIC_IP>` amongst all the devices on your wireless network including other Raspberry Pis that you set up with static IPs.
    ```
-   # piPACT wireless static IP configuration template
    interface wlan0
    static ip_address=<STATIC_IP>/24
    static routers=<ROUTER_IP>
